@@ -14,7 +14,7 @@
 			    </tr>
 			  </thead>
 			  <tbody>
-			  	<template  v-for="post in posts" :key="post.id"> 
+			  	<template  v-for="post in posts" :key="post.id">
 				    <tr>
 				      <th scope="row">1</th>
 				      <td>{{ post.title }}</td>
@@ -42,13 +42,21 @@
 
 	    	onMounted(() =>{
 	    		posts.value = props.posts
+                console.log(posts.value);
 	    	})
 
-	        function LikePost(id){
+	        function LikePost(id) {
 	        	axios.post('/post-like',{'post_id':id}).then(response => {
-	                console.log(response.data);
+	                console.log(response);
 	            });
+                storeLike(id);
 	        }
+
+            function storeLike(post_id) {
+                axios.post('/storeLike', {'post_id':post_id}).then(response => {
+                    console.log(response);
+                });
+            }
 
 	        return {
 	        	posts,

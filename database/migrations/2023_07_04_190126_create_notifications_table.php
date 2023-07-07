@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            // Este campo es para saber que tipo de notificacion es
             $table->string('type');
+            // este es para saber a quien usuario ira la notificacion
             $table->morphs('notifiable');
+            // aca se guardan los datos que se ponen en el toarray de la notificacion
             $table->text('data');
             $table->timestamp('read_at')->nullable();
             $table->timestamps();
